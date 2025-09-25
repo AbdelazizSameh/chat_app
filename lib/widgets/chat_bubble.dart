@@ -1,4 +1,3 @@
-import 'package:chat_app/constants/constants.dart';
 import 'package:chat_app/models/messages_model.dart';
 import 'package:flutter/material.dart';
 
