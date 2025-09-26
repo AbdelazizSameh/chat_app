@@ -26,7 +26,7 @@ class LoginCubit extends Cubit<LoginState> {
 
       emit(LoginFailureState(message: errorMessage));
     } catch (e) {
-      errorMessage = e.toString();
+      errorMessage = 'there was an error, try again later.';
       emit(LoginFailureState(message: errorMessage));
     }
   }

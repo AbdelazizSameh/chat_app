@@ -11,6 +11,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
+import '../cubits/chat_cubit/chat_cubit.dart';
+
 class SignInView extends StatefulWidget {
   const SignInView({super.key});
   static String id = 'signInView';
@@ -31,6 +33,7 @@ class _SignInViewState extends State<SignInView> {
         if (state is LoginLoadingState) {
           isLoading = true;
         } else if (state is LoginSuccessState) {
+          BlocProvider.of<ChatCubit>(context).getMessages();
           showSnackBar(context, message: 'success');
           isLoading = false;
           Navigator.pushNamed(context, ChatView.id, arguments: email);

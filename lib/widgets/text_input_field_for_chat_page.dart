@@ -1,6 +1,7 @@
 import 'package:chat_app/constants/constants.dart';
-import 'package:chat_app/helpers/helpers.dart';
+import 'package:chat_app/cubits/chat_cubit/chat_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class TextInputFieldForChatPage extends StatelessWidget {
   const TextInputFieldForChatPage({
@@ -17,19 +18,12 @@ class TextInputFieldForChatPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextField(
       controller: controller,
-      onSubmitted: (_) => onSubmitted(
-        controller: controller,
-        scrollController: scrollController,
-        email: email,
-      ),
+      onSubmitted: (_) => _sendMessage(context),
       decoration: InputDecoration(
         hintText: 'Send Message',
         suffixIcon: IconButton(
-          onPressed: () => onSubmitted(
-            controller: controller,
-            scrollController: scrollController,
-            email: email,
-          ),
+          onPressed: () => _sendMessage(context),
+
           icon: Icon(Icons.send),
           color: kPrimaryColor,
         ),
@@ -43,5 +37,26 @@ class TextInputFieldForChatPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void _sendMessage(BuildContext context) {
+    final userMessage = controller.text.trim();
+    if (userMessage.isEmpty) return;
+
+    BlocProvider.of<ChatCubit>(
+      context,
+    ).sendMessage(userMessage: userMessage, email: email);
+
+    controller.clear();
+
+    if (scrollController.hasClients) {
+      scrollController.animateTo(
+        scrollController.position.maxScrollExtent,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeOut,
+      );
+    }
+
+    FocusScope.of(context).unfocus();
   }
 }
