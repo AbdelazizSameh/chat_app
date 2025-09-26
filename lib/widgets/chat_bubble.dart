@@ -12,7 +12,7 @@ class ChatBubble extends StatelessWidget {
     return UnconstrainedBox(
       alignment: Alignment.centerRight,
       child: Container(
-        margin: EdgeInsets.only(bottom: 10, right: 40),
+        margin: EdgeInsets.only(bottom: 10),
         padding: EdgeInsets.symmetric(vertical: 16, horizontal: 10),
         constraints: BoxConstraints(maxWidth: 170, minWidth: 0),
         decoration: BoxDecoration(

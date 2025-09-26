@@ -1,6 +1,4 @@
-import 'package:chat_app/constants/constants.dart';
 import 'package:chat_app/cubits/chat_cubit/chat_cubit.dart';
-import 'package:chat_app/models/messages_model.dart';
 import 'package:chat_app/widgets/chat_bubble.dart';
 import 'package:chat_app/widgets/chat_bubble_for_a_friend.dart';
 import 'package:chat_app/widgets/text_input_field_for_chat_page.dart';
